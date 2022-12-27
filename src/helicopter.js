@@ -12,7 +12,7 @@ class Helicopter {
     this.bombstime = 0
 
     this.img = new Image();
-    this.img.src = '../../dusty-war/src/images/Enemy/Helicopter-movement.png'
+    this.img.src = '../src/images/Enemy/Helicopter-movement.png'
     this.img.frames = 4
     this.img.frameIndex = 0
     this.count = 0

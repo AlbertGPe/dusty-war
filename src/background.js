@@ -9,7 +9,7 @@ class Background {
     this.velx = -1
 
     this.img = new Image()
-    this.img.src = '../../dusty-war/src/images/Background/Demo.png'
+    this.img.src = '../src/images/Background/Demo.png'
   }
 
   draw() {

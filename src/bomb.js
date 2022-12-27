@@ -6,7 +6,7 @@ class Bomb {
     this.vely = 2
 
     this.img = new Image();
-    this.img.src = '../../dusty-war/src/images/Enemy/Bomb.png'
+    this.img.src = '../src/images/Enemy/Bomb.png'
     this.count = 0;
   }
 

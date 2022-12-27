@@ -17,14 +17,14 @@ class Soldier {
 
     // SOLDIER WALKING
     this.img = new Image()
-    this.img.src = '../../dusty-war/src/images/Soldier/Soldier-walking.png'
+    this.img.src = '../src/images/Soldier/Soldier-walking.png'
     this.img.frames = 2
     this.img.frameIndex = 0
     this.count = 0
 
     //HEALTH IMG
     this.healthImg = new Image()
-    this.healthImg.src = '../../dusty-war/src/images/Soldier/soldier-health.png'
+    this.healthImg.src = '../src/images/Soldier/soldier-health.png'
     this.healthImg.frames = 11
     this.healthImg.frameIndex = 0
 
@@ -105,7 +105,7 @@ class Soldier {
     
     const bullet = new Bullet(ctx, this.x + 40, this.y + 10);
     bullet.img = new Image();
-    bullet.img.src = '../../dusty-war/src/images/Soldier/soldier-bullet.png'
+    bullet.img.src = '../src/images/Soldier/soldier-bullet.png'
     bullet.owner.soldier = true;
     this.bullets.push(bullet);
   }

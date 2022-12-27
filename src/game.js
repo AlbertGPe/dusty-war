@@ -125,7 +125,7 @@ class Game {
             this.soldier.bullets.splice(i, 1);
             //DRAW BLOOD IMG
             this.bloodimg = new Image();
-            this.bloodimg.src = '../../dusty-war/src/images/Enemy/enemy-blood.png'
+            this.bloodimg.src = '../src/images/Enemy/enemy-blood.png'
             this.ctx.drawImage(this.bloodimg, this.enemies[j].x - 25, this.enemies[j].y, 50, 30);
             //DECREASING ENEMY HEALTH
             this.enemies[j].health--;
@@ -219,7 +219,7 @@ class Game {
 
   gameOver() {
     this.img = new Image();
-    this.img.src = '../../dusty-war/src/images/Menus/Game-over.png'
+    this.img.src = '../src/images/Menus/Game-over.png'
 
      this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
   }

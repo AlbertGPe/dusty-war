@@ -9,7 +9,7 @@ html, body {
 
 .container {
   text-align: center;
-  background-image: url(../../dusty-war/src/images/Menus/Menu.jpg);
+  background-image: url(../src/images/Menus/Menu.jpg);
   background-size:cover;
   background-repeat:no-repeat;	
   width: 1000px;
