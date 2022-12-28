@@ -5,21 +5,30 @@ class Game {
     this.interval = null;
     this.background = new Background(ctx);
     this.soldier = new Soldier(ctx);
-    //this.boss = null;
-    this.boss = new Boss(ctx);
+    this.boss = []
 
     this.enemies = []
     this.enemyApparition = 60 * 5
 
-    this.helicopterApparition = 320
+    this.helicopterApparition = 250
 
     this.helicopters = []
 
     //CONTAR PARA LA APARICIÓN DEL BOSS
     this.enemiesDead = 0
+    this.bossDead = 0
+
+    //PUNTUACIÓN FINAL DODGE
+    this.bulletsDodged = 0
+    this.bombsDodged = 0
+
+    //MUSIC
+    /*this.backgroundMusic = new Audio('../src/Music/soundtrack.mp3')
+    this.backgroundMusic.volume = 0.1*/
   }
 
   start() {
+    this.backgroundMusic.play();
     this.initListeners();
 
     this.interval = setInterval(() => {
@@ -29,11 +38,10 @@ class Game {
       this.checkEnemyCollision();
       this.checkSoldierCollision();
       this.checkBossCollision();
-      /*if (this.soldier.health <= 0) {
-        this.gameOver();
-      }*/
       this.move();
     },1000 / 60);
+
+    
   }
 
   initListeners() {
@@ -56,7 +64,8 @@ class Game {
     this.background.draw();
     this.soldier.draw();
     this.enemies.forEach(enemy => enemy.draw())
-    this.helicopters.forEach(helicopter => helicopter.draw()) 
+    this.helicopters.forEach(helicopter => helicopter.draw())
+    this.boss.forEach(boss => boss.draw()) 
   }
 
   move() {
@@ -64,51 +73,51 @@ class Game {
     this.soldier.move();
     this.enemies.forEach(enemy => enemy.move())
     this.helicopters.forEach(helicopter => helicopter.move()) 
+    this.boss.forEach(boss => boss.move()) 
   }
 
   addEnemy() {
-    if (this.enemiesDead <= 3) { 
-      this.addEnemies();
-      this.boss.health = 30; //QUITAR CUANDO SE ARREGLE EL BUG DE HACER HIT SIN QUE ESTE DIBUJADO
-    }
-    if (this.enemiesDead > 3 && this.enemiesDead < 7 && this.boss.health > 0) {
-      /*if (!this.boss) {
-        this.boss = new Boss(ctx);
-      }*/
-      this.addBoss();
-    }
-    if (this.enemiesDead > 3 && this.enemiesDead < 7 && this.boss.health <= 0) {
-      this.addEnemies();
-      this.addHelicopters();
-    }
-    if (this.enemiesDead >= 7 && this.boss.health <= 0) {
-      this.boss.health = 30;
-    }
-    if (this.enemiesDead >= 7) {
-      this.addBoss();
-      this.addHelicopters();
+    if (this.bossDead === 2) {
+      this.win();
+      this.helicopters = []
+    } else {
+      if (this.enemiesDead < 1) {
+        this.addEnemies();
+      }
+      if (this.enemiesDead >= 1 && this.enemiesDead < 4 && !this.boss.length && !this.bossDead) {
+        this.addBoss();
+      }
+      if (this.enemiesDead < 4 && this.bossDead === 1) {
+        this.addHelicopters();
+        this.addEnemies();
+      }
+      if (this.enemiesDead >= 4 && !this.boss.length && this.bossDead === 1) {
+        this.addBoss();
+      }
+      if (this.enemiesDead >= 4) {
+        this.addHelicopters();
+      }
     }
   }
 
   addEnemies(){
     this.enemyApparition--
 
-      if(this.enemyApparition <= 0) {
-        this.enemyApparition = 200 + Math.random() * 300; //RANDOM TIME TO ENEMY APPEAR TO NOT BE ALWAYS THE SAME
-        this.enemies.push(new Enemy(this.ctx));
-      }
+    if(this.enemyApparition <= 0) {
+      this.enemyApparition = 100 + Math.random() * 300; //RANDOM TIME TO ENEMY APPEAR TO NOT BE ALWAYS THE SAME
+      this.enemies.push(new Enemy(this.ctx));
+    }
   }
 
   addBoss() {
-    this.boss.draw();
-    this.boss.move();
+    this.boss.push(new Boss(this.ctx))
   }
 
   addHelicopters() {
     this.helicopterApparition--
 
     if (this.helicopterApparition <= 0) {
-      this.helicopterApparition = 220 + Math.random() * 300
+      this.helicopterApparition = 200 + Math.random() * 250
       this.helicopters.push(new Helicopter(this.ctx))
     }
   }
@@ -142,16 +151,25 @@ class Game {
 
   checkBossCollision() {
     for (let i = 0; i < this.soldier.bullets.length; i++){
-      if (this.soldier.bullets.length
-        && this.soldier.bullets[i].x + this.soldier.bullets[i].img.width >= this.boss.x + 40
-        && this.soldier.bullets[i].x <= this.boss.x + this.boss.img.width / this.boss.img.frames
-        && this.soldier.bullets[i].y >= this.boss.y
-        && this.soldier.bullets[i].y + this.soldier.bullets[i].img.height <= this.boss.y + this.boss.img.height) {
+      if (this.soldier.bullets.length && this.boss.length
+        && this.soldier.bullets[i].x + this.soldier.bullets[i].img.width >= this.boss[0].x + 40
+        && this.soldier.bullets[i].x <= this.boss[0].x + this.boss[0].img.width / this.boss[0].img.frames
+        && this.soldier.bullets[i].y >= this.boss[0].y
+        && this.soldier.bullets[i].y + this.soldier.bullets[i].img.height <= this.boss[0].y + this.boss[0].img.height) {
           //DELETE FROM ARRAY AND SCREEN THE BULLET THAT IS HITTING THE BOSS
-          this.soldier.bullets.splice(i, 1);   
+          this.soldier.bullets.splice(i, 1);  
+          //DRAW BLOOD IMG
+          this.bloodimg = new Image();
+          this.bloodimg.src = '../src/images/Enemy/enemy-blood.png'
+          this.ctx.drawImage(this.bloodimg, this.boss[0].x + 45, this.boss[0].y + 20, 50, 30);
           //DECREASING BOSS HEALTH
-          this.boss.health -= 2
-          console.log(this.boss.health)
+          this.boss[0].health -= 2
+          if (this.boss[0].health <= 0){
+            this.boss.splice(0, 1);
+            this.bossDead++;
+            console.log(this.bossDead)
+          }
+          
         }
     }
   }
@@ -170,6 +188,10 @@ class Game {
             this.soldier.health--;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
             //this.soldier.healthImg.frameIndex++
+           } else if (this.enemies[j].bullets[i].x <= 0) {
+            this.enemies[j].bullets.splice(i, 1);
+            this.bulletsDodged++
+            console.log(this.bulletsDodged)
            }
       }
 
@@ -188,16 +210,22 @@ class Game {
     }
 
     //COLLISION BY BOSS BULLETS
-    for (let i = 0; i < this.boss.bullets.length; i++) {
-      if (this.boss.bullets.length
-        && this.boss.bullets[i].x <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames - 15
-        && this.boss.bullets[i].x + this.boss.bullets[i].img.width >= this.soldier.x
-        && this.boss.bullets[i].y >= this.soldier.y
-        && this.boss.bullets[i].y + this.boss.bullets[i].img.height <= this.soldier.y + this.soldier.img.height) {
-          this.boss.bullets.splice(i, 1)
-          //this.soldier.healthImg.frameIndex++
-          console.log('hitbyboss')
-        }
+     if (this.boss.length) { 
+      for (let i = 0; i < this.boss[0].bullets.length; i++) {
+        if (this.boss[0].bullets.length
+          && this.boss[0].bullets[i].x <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames - 15
+          && this.boss[0].bullets[i].x + this.boss[0].bullets[i].img.width >= this.soldier.x
+          && this.boss[0].bullets[i].y >= this.soldier.y
+          && this.boss[0].bullets[i].y + this.boss[0].bullets[i].img.height <= this.soldier.y + this.soldier.img.height) {
+            this.boss[0].bullets.splice(i, 1)
+            //this.soldier.healthImg.frameIndex += 3
+            console.log('hitbyboss')
+          } else if (this.boss[0].bullets[i].x <= 0) {
+            this.boss[0].bullets.splice(i, 1)
+            this.bulletsDodged++
+            console.log(this.bulletsDodged)
+           }
+      }
     }
 
     //COLLISION BY BOMBS
@@ -211,16 +239,34 @@ class Game {
             console.log('bomb hit')
             this.soldier.health--;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
-            //this.soldier.healthImg.frameIndex++
+            //this.soldier.healthImg.frameIndex += 2
+           } else if (this.helicopters[j].bombs.length 
+            && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= 347) {
+            this.bombsDodged++
+            console.log(this.bombsDodged)
            }
       }
     }   
+    /*if (this.soldier.health <= 0) {
+        this.gameOver();
+      }*/
+  }
+
+  win() {
+    this.img = new Image();
+    this.img.src = '../src/images/Menus/menu-win.jpg'
+    this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+
+    this.ctx.font = "40px Arial";
+    this.ctx.fillStyle = "#FFFFFF";
+    this.ctx.fillText(`You dodged ${this.bulletsDodged} bullets and ${this.bombsDodged} bombs!`, 200, 180)
   }
 
   gameOver() {
     this.img = new Image();
     this.img.src = '../src/images/Menus/Game-over.png'
 
-     this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    clearInterval(this.interval);
   }
 }

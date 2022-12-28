@@ -76,7 +76,7 @@ class Helicopter {
   checkBombFloorCollision() {
     for (let i = 0; i < this.bombs.length; i++) {
       if (this.bombs[i].y + this.bombs[i].img.height >= this.floor) {
-        this.bombs.splice(i, 1)
+        this.bombs.splice(i, 1);
         /*this.ctx.drawImage (
           this.bombimg,
           this.bombimg.frameIndex * this.bombimg.width / this.bombimg.frames,

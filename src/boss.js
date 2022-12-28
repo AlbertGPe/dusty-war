@@ -2,12 +2,13 @@ class Boss {
   constructor(ctx) {
     this.ctx = ctx;
 
-    this.x = 750;
+    this.x = 1000;
     this.y = 260;
     this.w = 150;
     this.h = 80;
+    this.velx = -1
 
-    this.health = 30; //VIDA SERÁ 100
+    this.health = 10; //VIDA SERÁ 100
 
     //BOSS FIRING IMG
     this.img = new Image();
@@ -36,10 +37,20 @@ class Boss {
     this.fireAnimation();
     this.shootTime();
    }
+   this.drawHealth();
   }
 
   move() {
+    if (this.x > 750){
+      this.x += this.velx
+    }
     this.bullets.forEach(bullet => bullet.move())
+  }
+
+  drawHealth() {
+    this.ctx.font = "16px Arial";
+    this.ctx.fillStyle = "#FFFFFF";
+    this.ctx.fillText(this.health, this.x + this.w, this.y + this.h)
   }
 
   shoot() {
@@ -89,7 +100,7 @@ class Boss {
       0,
       this.aparitionimg.width / this.aparitionimg.frames,
       this.aparitionimg.height,
-      775,
+      this.x,
       280,
       120,
       60
