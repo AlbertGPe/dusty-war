@@ -9,11 +9,22 @@
 
   <body>
     <div class="container">
-      <div id="menu">
-        <button id="start-btn">
-          <img src="../src/images/Menus/START3d.png" alt="strat">
-        </button>
-      </div>
+        <div id="menu">
+          <button class="start-btn">
+            <img src="../src/images/Menus/START3d.png" alt="start">
+          </button>
+        </div>
+        <div id="win-menu">
+          <div><p id="score"></p></div>
+          <div id="win-menu-buttons">
+            <button class="start-btn">
+              <img src="../src/images/Menus/PLAY-AGAIN3d.png" alt="play-again">
+            </button>
+            <button id="return-menu">
+              <img src="../src/images/Menus/MENU.png" alt="menu">
+            </button>
+          </div>
+        </div> 
       <canvas id="canvas" width="1000" height="400">  
     </div>
     <script src="src/background.js"></script>

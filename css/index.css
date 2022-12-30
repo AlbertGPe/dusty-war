@@ -38,6 +38,45 @@ canvas {
   background-color: transparent;
 }
 
-#start-btn:hover img{
+#menu button:hover img{
+  -webkit-transform:scale(1.3);transform:scale(1.3);
+}
+
+#win-menu {
+  display: none;
+  background-image: url(../src/images/Menus/menu-win.jpg);
+  background-size:cover;
+  background-repeat:no-repeat;	
+  width: 1000px;
+  height: 400px;
+}
+
+#score {
+  margin: 0px;
+  color: red;
+  font-size: 40px;
+  font-family: fantasy;
+  padding-top: 150px;
+  text-shadow: 0.1em -0.1em #333;
+}
+
+#win-menu-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#win-menu-buttons button {
+  border: none;
+  background-color: transparent;
+  margin: 0 70px;
+}
+
+#win-menu-buttons button img {
+  width: 200px;
+}
+
+#win-menu-buttons button:hover img{
   -webkit-transform:scale(1.3);transform:scale(1.3);
 }

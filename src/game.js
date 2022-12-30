@@ -25,23 +25,45 @@ class Game {
     //MUSIC
     /*this.backgroundMusic = new Audio('../src/Music/soundtrack.mp3')
     this.backgroundMusic.volume = 0.1*/
+
+    this.bossMusic = new Audio('../src/Music/boss-killed.mp3')
+    this.bossMusic.volume = 0.1
+
+    this.gameOverMusic = new Audio('../src/Music/GameOver.ogg')
+    this.gameOverMusic.volume = 0.1
+
+    this.hitmarkerMusic = new Audio('../src/Music/hitmarker.mp3')
+    this.hitmarkerMusic.volume = 0.1
+
+    this.winMusic = new Audio('../src/Music/Victory.mp3')
+    this.winMusic.volume = 0.1
+
+    this.helMusic = new Audio('../src/Music/helicopter-appear.mp3')
+    this.helMusic.volume = 0.05
   }
 
   start() {
-    this.backgroundMusic.play();
+    //this.backgroundMusic.play();
     this.initListeners();
-
     this.interval = setInterval(() => {
-      this.clear();
-      this.draw();
-      this.addEnemy();
-      this.checkEnemyCollision();
-      this.checkSoldierCollision();
-      this.checkBossCollision();
-      this.move();
+      if (!this.soldier.paused) {
+        this.clear();
+        this.draw();
+        this.addEnemy();
+        this.checkEnemyCollision();
+        this.checkSoldierCollision();
+        this.checkBossCollision();
+        this.move();
+      } else {
+        this.pauseImg();
+      }
     },1000 / 60);
+  }
 
-    
+  pauseImg() {
+    this.img = new Image()
+    this.img.src = '../src/images/Menus/pause.png'
+    this.ctx.drawImage(this.img, 300, 100)
   }
 
   initListeners() {
@@ -88,6 +110,7 @@ class Game {
         this.addBoss();
       }
       if (this.enemiesDead < 4 && this.bossDead === 1) {
+        this.helMusic.play();
         this.addHelicopters();
         this.addEnemies();
       }
@@ -130,6 +153,7 @@ class Game {
           && this.soldier.bullets[i].x <= this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames
           && this.soldier.bullets[i].y >= this.enemies[j].y
           && this.soldier.bullets[i].y + this.soldier.bullets[i].img.height <= this.enemies[j].y + this.enemies[j].img.height) {
+            this.hitmarkerMusic.play();
             //DELETE FROM ARRAY AND SCREEN THE BULLET THAT IS HITTING THE ENEMY
             this.soldier.bullets.splice(i, 1);
             //DRAW BLOOD IMG
@@ -156,6 +180,7 @@ class Game {
         && this.soldier.bullets[i].x <= this.boss[0].x + this.boss[0].img.width / this.boss[0].img.frames
         && this.soldier.bullets[i].y >= this.boss[0].y
         && this.soldier.bullets[i].y + this.soldier.bullets[i].img.height <= this.boss[0].y + this.boss[0].img.height) {
+          this.hitmarkerMusic.play();
           //DELETE FROM ARRAY AND SCREEN THE BULLET THAT IS HITTING THE BOSS
           this.soldier.bullets.splice(i, 1);  
           //DRAW BLOOD IMG
@@ -166,6 +191,7 @@ class Game {
           this.boss[0].health -= 2
           if (this.boss[0].health <= 0){
             this.boss.splice(0, 1);
+            this.bossMusic.play();
             this.bossDead++;
             console.log(this.bossDead)
           }
@@ -249,17 +275,19 @@ class Game {
     }   
     /*if (this.soldier.health <= 0) {
         this.gameOver();
+        this.gameOverMusic.play();
       }*/
   }
 
   win() {
-    this.img = new Image();
-    this.img.src = '../src/images/Menus/menu-win.jpg'
-    this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    const winMenu = document.getElementById('win-menu')
+    winMenu.style.display = 'block'
+    const canvas = document.getElementById('canvas')
+    canvas.style.display = 'none'
 
-    this.ctx.font = "40px Arial";
-    this.ctx.fillStyle = "#FFFFFF";
-    this.ctx.fillText(`You dodged ${this.bulletsDodged} bullets and ${this.bombsDodged} bombs!`, 200, 180)
+    document.getElementById('score').innerHTML = `YOU DODGED ${this.bulletsDodged} BULLETS AND ${this.bombsDodged} BOMBS!`;
+    this.winMusic.play();
+    clearInterval(this.interval);
   }
 
   gameOver() {

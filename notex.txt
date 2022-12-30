@@ -2,6 +2,7 @@ CLASS BOSS
     10 - vida será 100
 
 CLASS GAME
+    25,26,31 - musica soundtrack
     26 - quitar comentado game over
     45 - Cambiar numero de muertos a 15 para que se ejecute
     71 - quitar cuando se arregle el bug
@@ -21,6 +22,7 @@ CLASS SOLDIER
 CLASS HELICOPTER 
     74 - consolelog
     20/24 , 80/91, 97/708 - consolelog de la explosión al tocar el suelo
+
 
 BUGS
     - Boss pierde vida aunq la imagen no este (antes de que aparezca)

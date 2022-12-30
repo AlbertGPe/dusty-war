@@ -12,6 +12,8 @@ class Soldier {
     this.accx = 0
     this.accy = 0.5
 
+    this.paused = false
+
     //SOLDIER HEALTH
     this.health = 10
 
@@ -123,6 +125,14 @@ class Soldier {
     this.ctx.drawImage(this.img, this.x, this.y, this.img.width, this.img.height)
   }*/
 
+  pausedGame() {
+    if (!this.paused) {
+      this.paused = true
+    } else if (this.paused) {
+      this.paused = false
+    }
+  }
+
   onKeyDown(key) {
     switch(key) {
       case 37: 
@@ -140,6 +150,9 @@ class Soldier {
       /*case 40: 
         this.bend()
         break;*/
+      case 80:
+        this.pausedGame();
+        break;
     }
   }
 
