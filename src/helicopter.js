@@ -17,6 +17,9 @@ class Helicopter {
     this.img.frameIndex = 0
     this.count = 0
 
+    this.bombMusic = new Audio('../src/Music/bombs.mp3')
+    this.bombMusic.volume = 0.1
+
     /*this.bombimg = new Image();
     this.bombimg.src = '../../dusty-war/src/images/Enemy/Bomb-explosion.png'
     this.bombimg.frames = 10;
@@ -77,6 +80,8 @@ class Helicopter {
     for (let i = 0; i < this.bombs.length; i++) {
       if (this.bombs[i].y + this.bombs[i].img.height >= this.floor) {
         this.bombs.splice(i, 1);
+        this.bombMusic.play();
+        this.bombMusic.currentTime = 0;
         /*this.ctx.drawImage (
           this.bombimg,
           this.bombimg.frameIndex * this.bombimg.width / this.bombimg.frames,

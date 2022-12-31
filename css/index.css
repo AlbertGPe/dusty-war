@@ -22,6 +22,15 @@ canvas {
   display: none;
 }
 
+.start-btn, .return-menu{
+  border: none;
+  background-color: transparent;
+}
+
+.start-btn:hover img, .return-menu:hover img {
+  -webkit-transform:scale(1.3);transform:scale(1.3);
+}
+
 #menu {
   padding: 50px;
   height: 300px;
@@ -34,12 +43,6 @@ canvas {
   margin-top: 65px;
   height: 150px;
   width: 500px;
-  border: none;
-  background-color: transparent;
-}
-
-#menu button:hover img{
-  -webkit-transform:scale(1.3);transform:scale(1.3);
 }
 
 #win-menu {
@@ -68,8 +71,6 @@ canvas {
 }
 
 #win-menu-buttons button {
-  border: none;
-  background-color: transparent;
   margin: 0 70px;
 }
 
@@ -77,6 +78,19 @@ canvas {
   width: 200px;
 }
 
-#win-menu-buttons button:hover img{
-  -webkit-transform:scale(1.3);transform:scale(1.3);
+#game-over-menu {
+  display: none;
+  background-image: url(../src/images/Menus/Game-over.png);
+  background-size: 1000px 400px;
+  background-repeat:no-repeat;	
+  width: 1000px;
+  height: 400px;
+}
+
+#game-over-menu button img{
+  width: 250px;
+}
+
+#game-over-menu button {
+  margin: 140px 40px 0;
 }

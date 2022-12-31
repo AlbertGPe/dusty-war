@@ -28,6 +28,10 @@ class Boss {
     //BULLETS ARRAY
     this.bullets = []
     this.bulletsTime = 0
+
+    //AUDIO BOSS SHOOT
+    this.bossShootMusic = new Audio('../src/Music/boss-shot.mp3')
+    this.bossShootMusic.volume = 0.02
   }
 
   draw() {
@@ -59,6 +63,8 @@ class Boss {
     bullet.img.src = '../src/images/Enemy/boss-bullets.png'
     bullet.owner.boss = true;
     this.bullets.push(bullet);
+    this.bossShootMusic.play();
+
   }
 
   shootTime() {

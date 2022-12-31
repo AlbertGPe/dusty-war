@@ -32,6 +32,10 @@ class Soldier {
 
     // BULLETS ARRAY
     this.bullets = []
+
+    //SHOOT AUDIO
+    this.shootMusic = new Audio('../src/Music/soldier-shot.mp3')
+    this.shootMusic.volume = 0.02
   }
 
   draw() {
@@ -146,6 +150,8 @@ class Soldier {
         break;
       case 67:
         this.shoot()
+        this.shootMusic.play();
+        this.shootMusic.currentTime = 0
         break;
       /*case 40: 
         this.bend()

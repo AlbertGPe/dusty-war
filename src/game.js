@@ -23,8 +23,8 @@ class Game {
     this.bombsDodged = 0
 
     //MUSIC
-    /*this.backgroundMusic = new Audio('../src/Music/soundtrack.mp3')
-    this.backgroundMusic.volume = 0.1*/
+    this.backgroundMusic = new Audio('../src/Music/soundtrack.mp3')
+    this.backgroundMusic.volume = 0.1
 
     this.bossMusic = new Audio('../src/Music/boss-killed.mp3')
     this.bossMusic.volume = 0.1
@@ -33,18 +33,19 @@ class Game {
     this.gameOverMusic.volume = 0.1
 
     this.hitmarkerMusic = new Audio('../src/Music/hitmarker.mp3')
-    this.hitmarkerMusic.volume = 0.1
+    this.hitmarkerMusic.volume = 0.01
 
     this.winMusic = new Audio('../src/Music/Victory.mp3')
-    this.winMusic.volume = 0.1
+    this.winMusic.volume = 0.08
 
     this.helMusic = new Audio('../src/Music/helicopter-appear.mp3')
-    this.helMusic.volume = 0.05
+    this.helMusic.volume = 0.03
   }
 
   start() {
-    //this.backgroundMusic.play();
+    this.backgroundMusic.play();
     this.initListeners();
+  
     this.interval = setInterval(() => {
       if (!this.soldier.paused) {
         this.clear();
@@ -284,17 +285,30 @@ class Game {
     winMenu.style.display = 'block'
     const canvas = document.getElementById('canvas')
     canvas.style.display = 'none'
+    const gameOverMenu = document.getElementById('game-over-menu')
+    gameOverMenu.style.display = 'none'
 
     document.getElementById('score').innerHTML = `YOU DODGED ${this.bulletsDodged} BULLETS AND ${this.bombsDodged} BOMBS!`;
+    
+    this.backgroundMusic.pause();
+    this.backgroundMusic.currentTime = 0;
     this.winMusic.play();
+
     clearInterval(this.interval);
   }
 
   gameOver() {
-    this.img = new Image();
-    this.img.src = '../src/images/Menus/Game-over.png'
+    const canvas = document.getElementById('canvas')
+    canvas.style.display = 'none'
+    const menu = document.getElementById("menu")
+    menu.style.display = 'none'
+    const gameOverMenu = document.getElementById('game-over-menu')
+    gameOverMenu.style.display = 'block'
 
-    this.ctx.drawImage(this.img, 0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+    this.backgroundMusic.pause();
+    this.backgroundMusic.currentTime = 0;
+    this.gameOverMusic.play();
+
     clearInterval(this.interval);
   }
 }
