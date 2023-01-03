@@ -5,11 +5,11 @@ const ctx = canvas.getContext("2d")
 const menuMusic = new Audio('../src/Music/menu.mp3')
 menuMusic.volume = 0.1
 
-
 const menu = document.getElementById("menu")
 const winMenu = document.getElementById('win-menu')
 const startButtons = document.getElementsByClassName("start-btn")
 const gameOverMenu = document.getElementById('game-over-menu')
+let game = null
 
 for (let btn of startButtons){
   btn.onclick = () => {
@@ -19,7 +19,10 @@ for (let btn of startButtons){
     gameOverMenu.style.display = 'none'
     menuMusic.pause();
     menuMusic.currentTime = 0;
-    const game = new Game(ctx)
+    if (game) {
+      game.stop()
+    }
+    game = new Game(ctx)
     game.start()
   }
 }

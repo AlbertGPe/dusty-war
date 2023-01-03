@@ -9,7 +9,7 @@ class Enemy {
     this.velx = -1.5;
     
     //ENEMY HEALTH
-    this.health = 10;
+    this.health = 1;
 
     //BULLETS ARRAY
     this.bullets = []
@@ -21,6 +21,13 @@ class Enemy {
     this.img.frames = 6; // NUMBER OF IMAGES INSIDE THE IMAGE
     this.img.frameIndex = 0;
     this.count = 0; // COUNT TO GO FROM ONE FRAME (ONE IMAGE) TO ANOTHER
+
+    //ENEMY DIE
+    this.imgDie = new Image();
+    this.imgDie.src = '../src/images/Enemy/Enemies-dead-des.png'
+    this.imgDie.frames = 12
+    this.imgDie.frameIndex = 0
+    this.tick = 0
   }
 
   draw() {

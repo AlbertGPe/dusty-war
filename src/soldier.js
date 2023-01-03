@@ -15,7 +15,7 @@ class Soldier {
     this.paused = false
 
     //SOLDIER HEALTH
-    this.health = 10
+    this.health = 1
 
     // SOLDIER WALKING
     this.img = new Image()
@@ -123,12 +123,21 @@ class Soldier {
   }
 
   //TO BEND AND DODGE ENEMY BULLETS
-  /*bend() {
-    this.imgBend = new Image()
-    this.imgBend.src = '../src/images/Soldier/Soldier-bend.png'
+  bend() {
+    this.img.src = '../src/images/Soldier/Soldier-bend.png'
+    this.img.frames = 1
+    this.img.frameIndex = 0
+    this.w = 39
+    this.h = 65
+  }
 
-    this.ctx.drawImage(this.imgBend, this.x, this.y, 38, 37)
-  }*/
+  toNormalState() {
+    this.img.src = '../src/images/Soldier/Soldier-walking.png'
+    this.img.frames = 2
+    this.w = 60
+    this.h = 70
+    this.y = 280
+  }
 
   pausedGame() {
     if (!this.paused) {
@@ -154,9 +163,9 @@ class Soldier {
         this.shootMusic.play();
         this.shootMusic.currentTime = 0
         break;
-      /*case 40: 
+      case 40: 
         this.bend()
-        break;*/
+        break;
       case 80:
         this.pausedGame();
         break;
@@ -170,9 +179,9 @@ class Soldier {
         this.velx = 0
         break;
       //BEND
-      /*case 40:
-        this.img.src = '../src/images/Soldier-walkingpng.png'
-        break;*/
+      case 40:
+        this.toNormalState()
+        break;
     }
   }
 }

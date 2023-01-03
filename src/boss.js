@@ -8,7 +8,7 @@ class Boss {
     this.h = 80;
     this.velx = -1
 
-    this.health = 50;
+    this.health = null;
 
     //BOSS FIRING IMG
     this.img = new Image();
@@ -120,6 +120,6 @@ class Boss {
         this.changeimg++;
       }
     }
-    this.health = 50;
+    this.health = 10;
   }
 }

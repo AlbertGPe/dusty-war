@@ -9,6 +9,7 @@ class Game {
 
     this.enemies = []
     this.enemyApparition = 60 * 5
+    this.count = 0
 
     this.helicopterApparition = 250
 
@@ -27,7 +28,7 @@ class Game {
     this.backgroundMusic.volume = 0.1
 
     this.bossMusic = new Audio('../src/Music/boss-killed.mp3')
-    this.bossMusic.volume = 0.1
+    this.bossMusic.volume = 0.05
 
     this.gameOverMusic = new Audio('../src/Music/GameOver.ogg')
     this.gameOverMusic.volume = 0.1
@@ -36,18 +37,19 @@ class Game {
     this.hitmarkerMusic.volume = 0.01
 
     this.winMusic = new Audio('../src/Music/Victory.mp3')
-    this.winMusic.volume = 0.08
+    this.winMusic.volume = 0.06
 
     this.helMusic = new Audio('../src/Music/helicopter-appear.mp3')
     this.helMusic.volume = 0.03
   }
 
   start() {
-    this.backgroundMusic.play();
+   
     this.initListeners();
   
     this.interval = setInterval(() => {
       if (!this.soldier.paused) {
+        this.backgroundMusic.play();
         this.clear();
         this.draw();
         this.addEnemy();
@@ -57,6 +59,7 @@ class Game {
         this.move();
       } else {
         this.pauseImg();
+        this.backgroundMusic.pause();
       }
     },1000 / 60);
   }
@@ -104,21 +107,21 @@ class Game {
       this.win();
       this.helicopters = []
     } else {
-      if (this.enemiesDead < 10) {
+      if (this.enemiesDead < 1/*10*/ ){
         this.addEnemies();
       }
-      if (this.enemiesDead >= 10 && this.enemiesDead < 20 && !this.boss.length && !this.bossDead) {
+      if (this.enemiesDead >= 1/*10*/ && this.enemiesDead < 4/*20*/ && !this.boss.length && !this.bossDead) {
         this.addBoss();
       }
-      if (this.enemiesDead < 20 && this.bossDead === 1) {
+      if (this.enemiesDead < 4/*20*/ && this.bossDead === 1) {
         this.helMusic.play();
         this.addHelicopters();
         this.addEnemies();
       }
-      if (this.enemiesDead >= 20 && !this.boss.length && this.bossDead === 1) {
+      if (this.enemiesDead >= 4/*20*/ && !this.boss.length && this.bossDead === 1) {
         this.addBoss();
       }
-      if (this.enemiesDead >= 20) {
+      if (this.enemiesDead >= 4/*20*/) {
         this.addHelicopters();
       }
     }
@@ -165,7 +168,7 @@ class Game {
             this.enemies[j].health--;
             //DELETE ENEMY FROM ARRAY AND SCREEN
             if (this.enemies[j].health <= 0) {
-              this.enemies.splice(j , 1);
+              this.enemies.splice(j , 1);                      
               this.enemiesDead++;
             }
           }
@@ -209,9 +212,9 @@ class Game {
           && this.enemies[j].bullets[i].y >= this.soldier.y
           && this.enemies[j].bullets[i].y + this.enemies[j].bullets[i].img.height <= this.soldier.y + this.soldier.img.height) {
             this.enemies[j].bullets.splice(i, 1)
-            this.soldier.health--;
+            //this.soldier.health--;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
-            this.soldier.healthImg.frameIndex++
+            //this.soldier.healthImg.frameIndex++
            } else if (this.enemies[j].bullets[i].x <= 0) {
             this.enemies[j].bullets.splice(i, 1);
             this.bulletsDodged++
@@ -223,13 +226,13 @@ class Game {
         && this.enemies[j].x <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames
         && this.enemies[j].x >= this.soldier.x + this.soldier.img.width / this.soldier.img.frames - 1
         ) {
-          this.soldier.health--
-          this.soldier.healthImg.frameIndex++
+          //this.soldier.health--
+          //this.soldier.healthImg.frameIndex++
         }
       if (this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames >= this.soldier.x
-        && this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames <= this.soldier.x + 2) {
-          this.soldier.healthImg.frameIndex++
-          this.soldier.health--
+        && this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames <= this.soldier.x + 2) {          
+          //this.soldier.health--
+          //this.soldier.healthImg.frameIndex++
         }
     }
 
@@ -242,8 +245,8 @@ class Game {
           && this.boss[0].bullets[i].y >= this.soldier.y
           && this.boss[0].bullets[i].y + this.boss[0].bullets[i].img.height <= this.soldier.y + this.soldier.img.height) {
             this.boss[0].bullets.splice(i, 1)
-            this.soldier.health -= 3
-            this.soldier.healthImg.frameIndex += 3
+            //this.soldier.health -= 3
+            //this.soldier.healthImg.frameIndex += 3
           } else if (this.boss[0].bullets[i].x <= 0) {
             this.boss[0].bullets.splice(i, 1)
             this.bulletsDodged++
@@ -259,9 +262,9 @@ class Game {
           && this.helicopters[j].bombs[i].x + this.helicopters[j].bombs[i].img.width <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames
           && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= this.soldier.y + 10) {
             this.helicopters[j].bombs.splice(i, 1)
-            this.soldier.health -= 2;
+            //this.soldier.health -= 2;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
-            this.soldier.healthImg.frameIndex += 2
+            //this.soldier.healthImg.frameIndex += 2
            } else if (this.helicopters[j].bombs.length 
             && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= 347) {
             this.bombsDodged++
@@ -289,6 +292,11 @@ class Game {
     this.winMusic.play();
 
     clearInterval(this.interval);
+  }
+
+  stop() {
+    this.gameOverMusic.pause();
+    this.winMusic.pause();
   }
 
   gameOver() {

@@ -1,13 +1,10 @@
-
-CLASS SOLDIER
-    119 - Agacharse comentado    
-
-CLASS HELICOPTER 
-    74 - consolelog
-    20/24 , 80/91, 97/708 - consolelog de la explosión al tocar el suelo
-
-
 BUGS
     - Bala del enemigo desaparece al matar al enemigo
-    - Música del menú principal solo suena al iniciar el juego
+    - Música del menú principal solo suena al dar click al boton menu
     - Música del menú anterior deberia parar de sonar al dar click a un botón
+
+HACER
+
+    - Explosión de bomb
+    - Enemigo cae muerto
+    - Agachar soldado con buenas proporciones
