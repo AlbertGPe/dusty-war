@@ -124,9 +124,10 @@ class Soldier {
 
   //TO BEND AND DODGE ENEMY BULLETS
   /*bend() {
-    this.img.src = '../src/images/Soldier-bend.png'
+    this.imgBend = new Image()
+    this.imgBend.src = '../src/images/Soldier/Soldier-bend.png'
 
-    this.ctx.drawImage(this.img, this.x, this.y, this.img.width, this.img.height)
+    this.ctx.drawImage(this.imgBend, this.x, this.y, 38, 37)
   }*/
 
   pausedGame() {

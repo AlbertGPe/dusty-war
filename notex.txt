@@ -1,20 +1,3 @@
-CLASS BOSS
-    10 - vida será 100
-
-CLASS GAME
-    25,26,31 - musica soundtrack
-    26 - quitar comentado game over
-    45 - Cambiar numero de muertos a 15 para que se ejecute
-    71 - quitar cuando se arregle el bug
-    95 - consolelog
-    110 - consolelog
-    124 - consolelog
-    127 - quitar comentario
-    134 - consolelog
-    135 - quitar comentario
-    139 - quitar comentario
-    150 - consolelog
-    176 - consolelog
 
 CLASS SOLDIER
     119 - Agacharse comentado    
@@ -25,4 +8,6 @@ CLASS HELICOPTER
 
 
 BUGS
-    - Boss pierde vida aunq la imagen no este (antes de que aparezca)
+    - Bala del enemigo desaparece al matar al enemigo
+    - Música del menú principal solo suena al iniciar el juego
+    - Música del menú anterior deberia parar de sonar al dar click a un botón

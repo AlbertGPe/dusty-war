@@ -9,9 +9,6 @@ html, body {
 
 .container {
   text-align: center;
-  background-image: url(../src/images/Menus/Menu.jpg);
-  background-size:cover;
-  background-repeat:no-repeat;	
   width: 1000px;
   height: 400px;
 }
@@ -29,18 +26,22 @@ canvas {
 
 .start-btn:hover img, .return-menu:hover img {
   -webkit-transform:scale(1.3);transform:scale(1.3);
+  cursor: pointer;
 }
 
 #menu {
-  padding: 50px;
+  display: block;
   height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
+  background-image: url(../src/images/Menus/Menu.jpg);
+  background-size:cover;
+  background-repeat:no-repeat;	
+  width: 1000px;
+  height: 400px;
 }
 
 #menu button {
-  margin-top: 65px;
+  margin-top: 110px;
   height: 150px;
   width: 500px;
 }

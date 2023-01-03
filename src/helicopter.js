@@ -94,7 +94,6 @@ class Helicopter {
           this.h
         )    
       /this.bombExplosionAnimation();*/
-        console.log('floor hit')
       }
     }
   }

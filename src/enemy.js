@@ -9,7 +9,7 @@ class Enemy {
     this.velx = -1.5;
     
     //ENEMY HEALTH
-    this.health = 3;
+    this.health = 10;
 
     //BULLETS ARRAY
     this.bullets = []

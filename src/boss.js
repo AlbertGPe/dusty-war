@@ -8,7 +8,7 @@ class Boss {
     this.h = 80;
     this.velx = -1
 
-    this.health = 10; //VIDA SERÁ 100
+    this.health = 50;
 
     //BOSS FIRING IMG
     this.img = new Image();
@@ -52,7 +52,7 @@ class Boss {
   }
 
   drawHealth() {
-    this.ctx.font = "16px Arial";
+    this.ctx.font = "16px Fantasy";
     this.ctx.fillStyle = "#FFFFFF";
     this.ctx.fillText(this.health, this.x + this.w, this.y + this.h)
   }
@@ -64,7 +64,6 @@ class Boss {
     bullet.owner.boss = true;
     this.bullets.push(bullet);
     this.bossShootMusic.play();
-
   }
 
   shootTime() {
@@ -121,6 +120,6 @@ class Boss {
         this.changeimg++;
       }
     }
-    this.health = 30;
+    this.health = 50;
   }
 }
