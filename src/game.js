@@ -82,7 +82,7 @@ class Game {
 
   clear() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    this.enemies = this.enemies.filter(enemy => enemy.insideCanvas()) //CLEAR ENEMIES ARRAY TO HAVE THE ONES IN CANVAS
+    this.enemies = this.enemies.filter(enemy => enemy.insideCanvas() && !enemy.shouldRemove()) //CLEAR ENEMIES ARRAY TO HAVE THE ONES IN CANVAS
     this.helicopters = this.helicopters.filter(helicopter => helicopter.insideCanvas())
   }
 
@@ -107,7 +107,7 @@ class Game {
       this.win();
       this.helicopters = []
     } else {
-      if (this.enemiesDead < 1/*10*/ ){
+      if (this.enemiesDead < 5/*10*/ ){
         this.addEnemies();
       }
       if (this.enemiesDead >= 1/*10*/ && this.enemiesDead < 4/*20*/ && !this.boss.length && !this.bossDead) {
@@ -150,28 +150,33 @@ class Game {
   }
 
   checkEnemyCollision() {
-   for (let j = 0; j < this.enemies.length; j++) {
+    for (let j = 0; j < this.enemies.length; j++) {
       for (let i = 0; i < this.soldier.bullets.length; i++) {
         if (this.soldier.bullets.length && this.enemies.length
           && this.soldier.bullets[i].x + this.soldier.bullets[i].img.width >= this.enemies[j].x
           && this.soldier.bullets[i].x <= this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames
           && this.soldier.bullets[i].y >= this.enemies[j].y
           && this.soldier.bullets[i].y + this.soldier.bullets[i].img.height <= this.enemies[j].y + this.enemies[j].img.height) {
-            this.hitmarkerMusic.play();
-            //DELETE FROM ARRAY AND SCREEN THE BULLET THAT IS HITTING THE ENEMY
-            this.soldier.bullets.splice(i, 1);
-            //DRAW BLOOD IMG
-            this.bloodimg = new Image();
-            this.bloodimg.src = '../src/images/Enemy/enemy-blood.png'
-            this.ctx.drawImage(this.bloodimg, this.enemies[j].x - 25, this.enemies[j].y, 50, 30);
-            //DECREASING ENEMY HEALTH
-            this.enemies[j].health--;
-            //DELETE ENEMY FROM ARRAY AND SCREEN
-            if (this.enemies[j].health <= 0) {
-              this.enemies.splice(j , 1);                      
-              this.enemiesDead++;
-            }
+            if (!this.enemies[j].enemyDead){  
+              this.hitmarkerMusic.play();
+              //DELETE FROM ARRAY AND SCREEN THE BULLET THAT IS HITTING THE ENEMY
+              this.soldier.bullets.splice(i, 1);
+              //DRAW BLOOD IMG
+              this.bloodimg = new Image();
+              this.bloodimg.src = '../src/images/Enemy/enemy-blood.png'
+              this.ctx.drawImage(this.bloodimg, this.enemies[j].x - 25, this.enemies[j].y, 50, 30);
+              //DECREASING ENEMY HEALTH
+              this.enemies[j].health--;
+              //DELETE ENEMY FROM ARRAY AND SCREEN
+              if (this.enemies[j].health <= 0) {                   
+                if (!this.enemies[j].enemyDead){
+                  this.enemiesDead++;
+                }
+                this.enemies[j].enemyDie();
+                
+              }
           }
+        }
       }
     }
   }

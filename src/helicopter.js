@@ -84,6 +84,9 @@ class Helicopter {
         this.bombMusic.currentTime = 0;
 
         this.bombs[i].explode()
+        if (this.bombs[i].shouldRemove()) {
+          this.bombs.splice(i , 1)
+        }
       }
     }
   }

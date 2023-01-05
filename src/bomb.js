@@ -4,16 +4,28 @@ class Bomb {
     this.x = x;
     this.y = y;
     this.vely = 2
+    this.w = 25
+    this.h = 25
 
     this.img = new Image();
-    this.img.src = '../src/images/Enemy/Bomb.png'
-    this.img.frames = 1
+    this.img.src = '../src/images/Enemy/bombseq.png'
+    this.img.frames = 7
     this.img.frameIndex = 0
     this.count = 0;
   }
 
   draw() {
-    this.ctx.drawImage(this.img, this.x, this.y) // TODO: draw with frames
+    this.ctx.drawImage(
+      this.img,
+      this.img.frameIndex * this.img.width / this.img.frames,
+      0,
+      this.img.width / this.img.frames,
+      this.img.height,
+      this.x,
+      this.y,
+      this.w,
+      this.h
+      ) // TODO: draw with frames
     this.animate()
   }
 
@@ -37,11 +49,13 @@ class Bomb {
   explode() {
     this.img.src = '../src/images/Enemy/Bomb-explosion.png'
     this.img.frames = 10
-    this.vely = 0
+    this.y = 280
+    this.w = 45
+    this.h = 60
   }
 
   shouldRemove() {
-    return this.img.frameIndex > 9
+    return this.img.frameIndex > 8
   }
 
 }

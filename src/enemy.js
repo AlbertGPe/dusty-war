@@ -8,6 +8,8 @@ class Enemy {
     this.h = 50;
     this.velx = -1.5;
     
+    this.enemyDead = false
+
     //ENEMY HEALTH
     this.health = 1;
 
@@ -21,13 +23,6 @@ class Enemy {
     this.img.frames = 6; // NUMBER OF IMAGES INSIDE THE IMAGE
     this.img.frameIndex = 0;
     this.count = 0; // COUNT TO GO FROM ONE FRAME (ONE IMAGE) TO ANOTHER
-
-    //ENEMY DIE
-    this.imgDie = new Image();
-    this.imgDie.src = '../src/images/Enemy/Enemies-dead-des.png'
-    this.imgDie.frames = 12
-    this.imgDie.frameIndex = 0
-    this.tick = 0
   }
 
   draw() {
@@ -35,7 +30,7 @@ class Enemy {
       this.img,
       this.img.frameIndex * this.img.width / this.img.frames,
       0,
-      (this.img.width / this.img.frames) - 3,
+      (this.img.width / this.img.frames) - 1,
       this.img.height,
       this.x,
       this.y,
@@ -44,7 +39,9 @@ class Enemy {
     )
 
     this.walkAnimation();
-    this.shootTime();
+    if (!this.enemyDead){
+      this.shootTime();
+    }
   }
 
   walkAnimation() {
@@ -54,6 +51,10 @@ class Enemy {
       this.count = 0;
       this.img.frameIndex++;
       if (this.img.frameIndex > this.img.frames - 1) {
+        if (this.img.frames === 13) { // enemy is dying
+          this._shouldRemove = true
+          this.img.frameIndex = 0;
+        }
         this.img.frameIndex = 0;
       }
     }
@@ -79,6 +80,17 @@ class Enemy {
       this.bulletsTime = 0;
     }
     this.bullets.forEach(bullet => bullet.draw())
+  }
+
+  enemyDie() {
+    this.img.src = '../src/images/Enemy/Enemies-dead-des.png'
+    this.img.frames = 13
+    this.w = 60
+    this.enemyDead = true
+  }
+
+  shouldRemove() {
+    return this._shouldRemove
   }
 
   insideCanvas() {

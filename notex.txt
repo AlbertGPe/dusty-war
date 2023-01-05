@@ -1,6 +1,4 @@
 BUGS
-    - Bala del enemigo desaparece al matar al enemigo
-    - Música del menú principal solo suena al dar click al boton menu
     - Música del menú anterior deberia parar de sonar al dar click a un botón
 
 HACER

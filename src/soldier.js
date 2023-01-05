@@ -6,7 +6,7 @@ class Soldier {
     this.y = 280
     this.w = 60
     this.h = 70
-    this.floor = 280 //CALLED FLOOR BUT ITS IMAGE FLOOR - SOLDIER HEIGHT. LA Y ESTA EN LA CABEZA DEL SOLDADO
+    this.floor = 350 //CALLED FLOOR BUT ITS IMAGE FLOOR - SOLDIER HEIGHT. LA Y ESTA EN LA CABEZA DEL SOLDADO
     this.velx = 0
     this.vely = 0
     this.accx = 0
@@ -86,8 +86,8 @@ class Soldier {
     this.x += this.velx;
     this.y += this.vely;
 
-    if(this.y >= this.floor) {
-        this.y = this.floor
+    if(this.y + this.h >= this.floor) {
+        this.y = this.floor - this.h
         this.vely = 0
       }
 
@@ -117,26 +117,31 @@ class Soldier {
   }
 
   jump() {
-    if (this.y === this.floor) {
+    if (this.y + this.h === this.floor) {
       this.vely = -9
     }
   }
 
   //TO BEND AND DODGE ENEMY BULLETS
   bend() {
+    if (this.isBend) {
+      return
+    }
+    this.isBend = true
     this.img.src = '../src/images/Soldier/Soldier-bend.png'
     this.img.frames = 1
     this.img.frameIndex = 0
-    this.w = 39
-    this.h = 65
+    this.w = 40
+    this.h = 45
+    this.y = this.y + this.h
   }
 
   toNormalState() {
+    this.isBend = false
     this.img.src = '../src/images/Soldier/Soldier-walking.png'
     this.img.frames = 2
     this.w = 60
     this.h = 70
-    this.y = 280
   }
 
   pausedGame() {
