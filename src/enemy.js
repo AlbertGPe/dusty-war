@@ -11,7 +11,7 @@ class Enemy {
     this.enemyDead = false
 
     //ENEMY HEALTH
-    this.health = 1;
+    this.health = 6;
 
     //BULLETS ARRAY
     this.bullets = []
