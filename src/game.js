@@ -107,7 +107,7 @@ class Game {
       this.win();
       this.helicopters = []
     } else {
-      if (this.enemiesDead < 5/*10*/ ){
+      if (this.enemiesDead < 1/*10*/ ){
         this.addEnemies();
       }
       if (this.enemiesDead >= 1/*10*/ && this.enemiesDead < 4/*20*/ && !this.boss.length && !this.bossDead) {
@@ -211,15 +211,15 @@ class Game {
     //COLLISION BY ENEMY BULLET
     for (let j = 0; j < this.enemies.length; j++) {
       for (let i = 0; i < this.enemies[j].bullets.length; i++) {
-        if (this.enemies[j].bullets.length
+        if (this.enemies[j].bullets.length && !this.enemies[j].enemyDead
           && this.enemies[j].bullets[i].x <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames
           && this.enemies[j].bullets[i].x + this.enemies[j].bullets[i].img.width >= this.soldier.x
           && this.enemies[j].bullets[i].y >= this.soldier.y
           && this.enemies[j].bullets[i].y + this.enemies[j].bullets[i].img.height <= this.soldier.y + this.soldier.img.height) {
             this.enemies[j].bullets.splice(i, 1)
-            //this.soldier.health--;
+            this.soldier.health--;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
-            //this.soldier.healthImg.frameIndex++
+            this.soldier.healthImg.frameIndex++
            } else if (this.enemies[j].bullets[i].x <= 0) {
             this.enemies[j].bullets.splice(i, 1);
             this.bulletsDodged++
@@ -231,13 +231,13 @@ class Game {
         && this.enemies[j].x <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames
         && this.enemies[j].x >= this.soldier.x + this.soldier.img.width / this.soldier.img.frames - 1
         ) {
-          //this.soldier.health--
-          //this.soldier.healthImg.frameIndex++
+          this.soldier.health--
+          this.soldier.healthImg.frameIndex++
         }
       if (this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames >= this.soldier.x
         && this.enemies[j].x + this.enemies[j].img.width / this.enemies[j].img.frames <= this.soldier.x + 2) {          
-          //this.soldier.health--
-          //this.soldier.healthImg.frameIndex++
+          this.soldier.health--
+          this.soldier.healthImg.frameIndex++
         }
     }
 
@@ -250,8 +250,8 @@ class Game {
           && this.boss[0].bullets[i].y >= this.soldier.y
           && this.boss[0].bullets[i].y + this.boss[0].bullets[i].img.height <= this.soldier.y + this.soldier.img.height) {
             this.boss[0].bullets.splice(i, 1)
-            //this.soldier.health -= 3
-            //this.soldier.healthImg.frameIndex += 3
+            this.soldier.health -= 3
+            this.soldier.healthImg.frameIndex += 3
           } else if (this.boss[0].bullets[i].x <= 0) {
             this.boss[0].bullets.splice(i, 1)
             this.bulletsDodged++
@@ -267,20 +267,21 @@ class Game {
           && this.helicopters[j].bombs[i].x + this.helicopters[j].bombs[i].img.width <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames
           && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= this.soldier.y + 10) {
             this.helicopters[j].bombs.splice(i, 1)
-            //this.soldier.health -= 2;
+            this.soldier.health -= 2;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
-            //this.soldier.healthImg.frameIndex += 2
-           } else if (this.helicopters[j].bombs.length 
-            && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= 347) {
+            this.soldier.healthImg.frameIndex += 2
+           } /*else if (this.helicopters[j].bombs.length 
+            && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= 348) {
             this.bombsDodged++
-           }
+            console.log(this.bombsDodged)
+           }*/
       }
     }   
     if (this.soldier.health <= 0) {
         this.gameOver();
         this.gameOverMusic.play();
       }
-  }
+    }
 
   win() {
     const winMenu = document.getElementById('win-menu')

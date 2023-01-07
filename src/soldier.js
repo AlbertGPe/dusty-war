@@ -6,7 +6,7 @@ class Soldier {
     this.y = 280
     this.w = 60
     this.h = 70
-    this.floor = 350 //CALLED FLOOR BUT ITS IMAGE FLOOR - SOLDIER HEIGHT. LA Y ESTA EN LA CABEZA DEL SOLDADO
+    this.floor = 350
     this.velx = 0
     this.vely = 0
     this.accx = 0
@@ -15,7 +15,7 @@ class Soldier {
     this.paused = false
 
     //SOLDIER HEALTH
-    this.health = 1
+    this.health = 10
 
     // SOLDIER WALKING
     this.img = new Image()

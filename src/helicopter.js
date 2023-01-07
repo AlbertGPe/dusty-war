@@ -10,6 +10,8 @@ class Helicopter {
 
     this.bombs = []
     this.bombstime = 0
+    
+    this.bombsDodged = 0
 
     this.img = new Image();
     this.img.src = '../src/images/Enemy/Helicopter-movement.png'
@@ -86,6 +88,7 @@ class Helicopter {
         this.bombs[i].explode()
         if (this.bombs[i].shouldRemove()) {
           this.bombs.splice(i , 1)
+          game.bombsDodged++
         }
       }
     }
