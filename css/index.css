@@ -33,7 +33,7 @@ canvas {
   display: block;
   height: 300px;
   text-align: center;
-  background-image: url(src/images/Menus/Menu.jpg);
+  background-image: url(../src/images/Menus/Menu.jpg);
   background-size:cover;
   background-repeat:no-repeat;	
   width: 1000px;
@@ -48,7 +48,7 @@ canvas {
 
 #win-menu {
   display: none;
-  background-image: url(src/images/Menus/menu-win.jpg);
+  background-image: url(../src/images/Menus/menu-win.jpg);
   background-size:cover;
   background-repeat:no-repeat;	
   width: 1000px;
@@ -81,7 +81,7 @@ canvas {
 
 #game-over-menu {
   display: none;
-  background-image: url(src/images/Menus/Game-over.png);
+  background-image: url(../src/images/Menus/Game-over.png);
   background-size: 1000px 400px;
   background-repeat:no-repeat;	
   width: 1000px;
