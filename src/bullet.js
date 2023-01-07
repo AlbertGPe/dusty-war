@@ -11,7 +11,7 @@ class Bullet {
     this.velx = 8;
 
     this.img = new Image();
-    this.img.src = '../src/images/Enemy/enemies-bullets.png'
+    this.img.src = 'src/images/Enemy/enemies-bullets.png'
   }
 
   draw() {

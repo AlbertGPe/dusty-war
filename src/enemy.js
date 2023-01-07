@@ -19,7 +19,7 @@ class Enemy {
 
     //ENEMY WALKING
     this.img = new Image();
-    this.img.src = '../src/images/Enemy/Enemie-walk-secuence.png'
+    this.img.src = 'src/images/Enemy/Enemie-walk-secuence.png'
     this.img.frames = 6; // NUMBER OF IMAGES INSIDE THE IMAGE
     this.img.frameIndex = 0;
     this.count = 0; // COUNT TO GO FROM ONE FRAME (ONE IMAGE) TO ANOTHER
@@ -69,7 +69,7 @@ class Enemy {
     const bullet = new Bullet(ctx, this.x - 20, this.y + 2)
     bullet.owner.enemy = true;
     bullet.img = new Image();
-    bullet.img.src = '../src/images/Enemy/enemies-bullets.png'
+    bullet.img.src = 'src/images/Enemy/enemies-bullets.png'
     this.bullets.push(bullet);
   }
 
@@ -83,7 +83,7 @@ class Enemy {
   }
 
   enemyDie() {
-    this.img.src = '../src/images/Enemy/Enemies-dead-des.png'
+    this.img.src = 'src/images/Enemy/Enemies-dead-des.png'
     this.img.frames = 13
     this.w = 60
     this.enemyDead = true

@@ -14,16 +14,16 @@ class Helicopter {
     this.bombsDodged = 0
 
     this.img = new Image();
-    this.img.src = '../src/images/Enemy/Helicopter-movement.png'
+    this.img.src = 'src/images/Enemy/Helicopter-movement.png'
     this.img.frames = 4
     this.img.frameIndex = 0
     this.count = 0
 
-    this.bombMusic = new Audio('../src/Music/bombs.mp3')
+    this.bombMusic = new Audio('src/Music/bombs.mp3')
     this.bombMusic.volume = 0.1
 
     this.bombimg = new Image();
-    this.bombimg.src = '../src/images/Enemy/Bomb-explosion.png'
+    this.bombimg.src = 'src/images/Enemy/Bomb-explosion.png'
     this.bombimg.frames = 10;
     this.bombimg.frameIndex = 0;
     this.count2 = 0;

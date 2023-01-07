@@ -8,7 +8,7 @@ class Bomb {
     this.h = 25
 
     this.img = new Image();
-    this.img.src = '../src/images/Enemy/bombseq.png'
+    this.img.src = 'src/images/Enemy/bombseq.png'
     this.img.frames = 7
     this.img.frameIndex = 0
     this.count = 0;
@@ -47,7 +47,7 @@ class Bomb {
   }
 
   explode() {
-    this.img.src = '../src/images/Enemy/Bomb-explosion.png'
+    this.img.src = 'src/images/Enemy/Bomb-explosion.png'
     this.img.frames = 10
     this.y = 280
     this.w = 45

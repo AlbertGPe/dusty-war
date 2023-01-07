@@ -12,14 +12,14 @@ class Boss {
 
     //BOSS FIRING IMG
     this.img = new Image();
-    this.img.src = '../src/images/Enemy/Bossfiring.png'
+    this.img.src = 'src/images/Enemy/Bossfiring.png'
     this.img.frames = 4
     this.img.framesIndex = 0
     this.count = 0;
 
     //BOSS APARITION IMG
     this.aparitionimg = new Image();
-    this.aparitionimg.src = '../src/images/Enemy/Boss-animation.png'
+    this.aparitionimg.src = 'src/images/Enemy/Boss-animation.png'
     this.aparitionimg.frames = 6
     this.aparitionimg.framesIndex = 0
     this.tick = 0
@@ -30,7 +30,7 @@ class Boss {
     this.bulletsTime = 0
 
     //AUDIO BOSS SHOOT
-    this.bossShootMusic = new Audio('../src/Music/boss-shot.mp3')
+    this.bossShootMusic = new Audio('src/Music/boss-shot.mp3')
     this.bossShootMusic.volume = 0.02
   }
 
@@ -60,7 +60,7 @@ class Boss {
   shoot() {
     const bullet = new Bullet(ctx, this.x + 17, this.y + 35)
     bullet.img = new Image();
-    bullet.img.src = '../src/images/Enemy/boss-bullets.png'
+    bullet.img.src = 'src/images/Enemy/boss-bullets.png'
     bullet.owner.boss = true;
     this.bullets.push(bullet);
     this.bossShootMusic.play();

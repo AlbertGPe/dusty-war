@@ -19,14 +19,14 @@ class Soldier {
 
     // SOLDIER WALKING
     this.img = new Image()
-    this.img.src = '../src/images/Soldier/Soldier-walking.png'
+    this.img.src = 'src/images/Soldier/Soldier-walking.png'
     this.img.frames = 2
     this.img.frameIndex = 0
     this.count = 0
 
     //HEALTH IMG
     this.healthImg = new Image()
-    this.healthImg.src = '../src/images/Soldier/soldier-health.png'
+    this.healthImg.src = 'src/images/Soldier/soldier-health.png'
     this.healthImg.frames = 11
     this.healthImg.frameIndex = 0
 
@@ -34,7 +34,7 @@ class Soldier {
     this.bullets = []
 
     //SHOOT AUDIO
-    this.shootMusic = new Audio('../src/Music/soldier-shot.mp3')
+    this.shootMusic = new Audio('src/Music/soldier-shot.mp3')
     this.shootMusic.volume = 0.02
   }
 
@@ -111,7 +111,7 @@ class Soldier {
     
     const bullet = new Bullet(ctx, this.x + 40, this.y + 10);
     bullet.img = new Image();
-    bullet.img.src = '../src/images/Soldier/soldier-bullet.png'
+    bullet.img.src = 'src/images/Soldier/soldier-bullet.png'
     bullet.owner.soldier = true;
     this.bullets.push(bullet);
   }
@@ -128,7 +128,7 @@ class Soldier {
       return
     }
     this.isBend = true
-    this.img.src = '../src/images/Soldier/Soldier-bend.png'
+    this.img.src = 'src/images/Soldier/Soldier-bend.png'
     this.img.frames = 1
     this.img.frameIndex = 0
     this.w = 40
@@ -138,7 +138,7 @@ class Soldier {
 
   toNormalState() {
     this.isBend = false
-    this.img.src = '../src/images/Soldier/Soldier-walking.png'
+    this.img.src = 'src/images/Soldier/Soldier-walking.png'
     this.img.frames = 2
     this.w = 60
     this.h = 70

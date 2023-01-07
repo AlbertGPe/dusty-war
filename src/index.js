@@ -2,7 +2,7 @@ const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext("2d")
 
 
-const menuMusic = new Audio('../src/Music/menu.mp3')
+const menuMusic = new Audio('src/Music/menu.mp3')
 menuMusic.volume = 0.1
 
 const menu = document.getElementById("menu")

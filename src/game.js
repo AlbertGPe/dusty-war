@@ -24,22 +24,22 @@ class Game {
     this.bombsDodged = 0
 
     //MUSIC
-    this.backgroundMusic = new Audio('../src/Music/soundtrack.mp3')
+    this.backgroundMusic = new Audio('src/Music/soundtrack.mp3')
     this.backgroundMusic.volume = 0.1
 
-    this.bossMusic = new Audio('../src/Music/boss-killed.mp3')
+    this.bossMusic = new Audio('src/Music/boss-killed.mp3')
     this.bossMusic.volume = 0.05
 
-    this.gameOverMusic = new Audio('../src/Music/GameOver.ogg')
+    this.gameOverMusic = new Audio('src/Music/GameOver.ogg')
     this.gameOverMusic.volume = 0.1
 
-    this.hitmarkerMusic = new Audio('../src/Music/hitmarker.mp3')
+    this.hitmarkerMusic = new Audio('src/Music/hitmarker.mp3')
     this.hitmarkerMusic.volume = 0.01
 
-    this.winMusic = new Audio('../src/Music/Victory.mp3')
+    this.winMusic = new Audio('src/Music/Victory.mp3')
     this.winMusic.volume = 0.06
 
-    this.helMusic = new Audio('../src/Music/helicopter-appear.mp3')
+    this.helMusic = new Audio('src/Music/helicopter-appear.mp3')
     this.helMusic.volume = 0.03
   }
 
@@ -66,7 +66,7 @@ class Game {
 
   pauseImg() {
     this.img = new Image()
-    this.img.src = '../src/images/Menus/pause.png'
+    this.img.src = 'src/images/Menus/pause.png'
     this.ctx.drawImage(this.img, 300, 100)
   }
 
@@ -163,7 +163,7 @@ class Game {
               this.soldier.bullets.splice(i, 1);
               //DRAW BLOOD IMG
               this.bloodimg = new Image();
-              this.bloodimg.src = '../src/images/Enemy/enemy-blood.png'
+              this.bloodimg.src = 'src/images/Enemy/enemy-blood.png'
               this.ctx.drawImage(this.bloodimg, this.enemies[j].x - 25, this.enemies[j].y, 50, 30);
               //DECREASING ENEMY HEALTH
               this.enemies[j].health--;
@@ -193,7 +193,7 @@ class Game {
           this.soldier.bullets.splice(i, 1);  
           //DRAW BLOOD IMG
           this.bloodimg = new Image();
-          this.bloodimg.src = '../src/images/Enemy/enemy-blood.png'
+          this.bloodimg.src = 'src/images/Enemy/enemy-blood.png'
           this.ctx.drawImage(this.bloodimg, this.boss[0].x + 45, this.boss[0].y + 20, 50, 30);
           //DECREASING BOSS HEALTH
           this.boss[0].health -= 2
@@ -270,11 +270,7 @@ class Game {
             this.soldier.health -= 2;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA
             this.soldier.healthImg.frameIndex += 2
-           } /*else if (this.helicopters[j].bombs.length 
-            && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= 348) {
-            this.bombsDodged++
-            console.log(this.bombsDodged)
-           }*/
+           }
       }
     }   
     if (this.soldier.health <= 0) {
