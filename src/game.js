@@ -107,21 +107,21 @@ class Game {
       this.win();
       this.helicopters = []
     } else {
-      if (this.enemiesDead < 1/*10*/ ){
+      if (this.enemiesDead < 10/*10*/ ){
         this.addEnemies();
       }
-      if (this.enemiesDead >= 1/*10*/ && this.enemiesDead < 4/*20*/ && !this.boss.length && !this.bossDead) {
+      if (this.enemiesDead >= 10/*10*/ && this.enemiesDead < 20/*20*/ && !this.boss.length && !this.bossDead) {
         this.addBoss();
       }
-      if (this.enemiesDead < 4/*20*/ && this.bossDead === 1) {
+      if (this.enemiesDead < 20/*20*/ && this.bossDead === 1) {
         this.helMusic.play();
         this.addHelicopters();
         this.addEnemies();
       }
-      if (this.enemiesDead >= 4/*20*/ && !this.boss.length && this.bossDead === 1) {
+      if (this.enemiesDead >= 20/*20*/ && !this.boss.length && this.bossDead === 1) {
         this.addBoss();
       }
-      if (this.enemiesDead >= 4/*20*/) {
+      if (this.enemiesDead >= 20/*20*/) {
         this.addHelicopters();
       }
     }

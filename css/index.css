@@ -5,17 +5,19 @@ html, body {
   padding: 0;
   display: flex;
   justify-content: center;
+  background-image: url(../src/images/Menus/mw2-home-spec-ops.jpg);
+  background-size: cover;
 }
 
 .container {
+  border: 5px solid black;
+  border-radius: 4px;
   text-align: center;
   width: 1000px;
   height: 400px;
 }
 
 canvas {
-  border: 1px solid white;
-  border-radius: 4px;
   display: none;
 }
 
