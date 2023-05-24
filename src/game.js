@@ -107,21 +107,21 @@ class Game {
       this.win();
       this.helicopters = []
     } else {
-      if (this.enemiesDead < 10/*10*/ ){
+      if (this.enemiesDead < 3/*10*/ ){
         this.addEnemies();
       }
-      if (this.enemiesDead >= 10/*10*/ && this.enemiesDead < 20/*20*/ && !this.boss.length && !this.bossDead) {
+      if (this.enemiesDead >= 3/*10*/ && this.enemiesDead < 6/*20*/ && !this.boss.length && !this.bossDead) {
         this.addBoss();
       }
-      if (this.enemiesDead < 20/*20*/ && this.bossDead === 1) {
+      if (this.enemiesDead < 6/*20*/ && this.bossDead === 1) {
         this.helMusic.play();
         this.addHelicopters();
         this.addEnemies();
       }
-      if (this.enemiesDead >= 20/*20*/ && !this.boss.length && this.bossDead === 1) {
+      if (this.enemiesDead >= 6/*20*/ && !this.boss.length && this.bossDead === 1) {
         this.addBoss();
       }
-      if (this.enemiesDead >= 20/*20*/) {
+      if (this.enemiesDead >= 6/*20*/) {
         this.addHelicopters();
       }
     }
@@ -265,7 +265,7 @@ class Game {
         if (this.helicopters[j].bombs.length
           && this.helicopters[j].bombs[i].x >= this.soldier.x
           && this.helicopters[j].bombs[i].x + this.helicopters[j].bombs[i].img.width <= this.soldier.x + this.soldier.img.width / this.soldier.img.frames
-          && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= this.soldier.y + 10) {
+          && this.helicopters[j].bombs[i].y + this.helicopters[j].bombs[i].img.height >= this.soldier.y) {
             this.helicopters[j].bombs.splice(i, 1)
             this.soldier.health -= 2;
             //SUMAR EL FRAMEINDEX PARA IR CAMBIANDO LA IMAGEN DE VIDA

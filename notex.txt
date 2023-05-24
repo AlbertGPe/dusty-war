@@ -1,8 +1,0 @@
-BUGS
-    - Música del menú anterior deberia parar de sonar al dar click a un botón
-
-HACER
-
-    - Explosión de bomb
-    - Enemigo cae muerto
-    - Agachar soldado con buenas proporciones

@@ -120,6 +120,6 @@ class Boss {
         this.changeimg++;
       }
     }
-    this.health = 60;
+    this.health = 40;
   }
 }

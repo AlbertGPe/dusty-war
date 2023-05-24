@@ -10,7 +10,6 @@ html, body {
 }
 
 .container {
-  border: 5px solid black;
   border-radius: 4px;
   text-align: center;
   width: 1000px;
